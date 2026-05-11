@@ -11,9 +11,9 @@ jobs:
     if: ${{ github.event.repository.fork }}
     steps:
       - name: Checkout target repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v6
       - name: Sync Upstream
-        uses: aormsby/Fork-Sync-With-Upstream-action@v3.4
+        uses: aormsby/fork-sync-with-upstream-action@v3.4.3
         with:
           target_repo_token: ${{ secrets.GITHUB_TOKEN }}
           upstream_sync_repo: mtvpls/MoonTVPlus   # 替换为原始仓库
