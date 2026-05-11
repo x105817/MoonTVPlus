@@ -1,0 +1,22 @@
+name: Upstream Sync
+permissions:
+  contents: write
+on:
+  schedule:
+    - cron: "0 0 * * *"  # 定时任务，每天 UTC 时间 0 点执行
+  workflow_dispatch:     # 允许手动触发
+jobs:
+  sync_with_upstream:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.repository.fork }}
+    steps:
+      - name: Checkout target repo
+        uses: actions/checkout@v3
+      - name: Sync Upstream
+        uses: aormsby/Fork-Sync-With-Upstream-action@v3.4
+        with:
+          target_repo_token: ${{ secrets.GITHUB_TOKEN }}
+          upstream_sync_repo: mtvpls/MoonTVPlus   # 替换为原始仓库
+          upstream_sync_branch: main
+          target_sync_branch: main
+          test_mode: false
